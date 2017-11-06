@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>注册-说说</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/jumbotron.css" rel="stylesheet">
+    <style>
+        body{
+            padding-top:50px;
+        }
+        .jumbotron {
+            background: #fff!important;
+        }
+
+    </style>
+</head>
+
+<body>
+<% include header.ejs%>
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <h3>请上传图片</h3>
+            <!--这个用表单提交，ajax好难-->
+            <form method="post" action="/doavatar" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="file">选择图片：</label>
+                    <input type="file" class="form-control" id="file" name="pic">
+                </div>
+                <button type="submit" id="setavatar" class="btn btn-default" >上传</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery.3.2.1.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

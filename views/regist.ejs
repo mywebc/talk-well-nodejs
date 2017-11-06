@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>注册-说说</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+<link href="css/jumbotron.css" rel="stylesheet">
+        <style>
+            body{
+                padding-top:50px;
+            }
+            .jumbotron {
+                background: #fff!important;
+            }
+            #error {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+    <% include header.ejs%>
+
+    <div class="jumbotron">
+            <div class="container">
+            <div class="row">
+                <h3>请先注册</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="username">用户名</label>
+                        <input type="text" class="form-control" id="username" placeholder="用户名，可以是中文，不能和别人重复">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密码</label>
+                        <input type="password" class="form-control" id="password" placeholder="密码，至少6位">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> 我为自己代言
+                        </label>
+                    </div>
+                    <button type="button" id="regist" class="btn btn-default" >注册</button>
+                </form>
+                <!--警告框-->
+                <div class="alert alert-danger" role="alert" id="error"></div>
+            </div>
+        </div>
+    </div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.3.2.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $("input").focus(function () {
+            $("#error").fadeOut();
+        })
+        //用ajax发送表单请求
+        $("#regist").click(function () {
+           $.post("/doregist",{
+               "username":$("#username").val(),
+               "password":$("#password").val(),
+           },function (result) {
+               if(result=="1"){
+                   //注册成功
+                   alert("注册成功！确认后将跳转首页！")
+                   window.location="/";
+               }else if(result=="-1"){
+                   //用户名重复
+                   $("#error").fadeIn().html("用户已经存在请重新输入！");
+               }else if(result=="-3"){
+                   //服务器错误
+                   alert("服务器错误")
+               }
+           })
+        })
+
+    </script>
+    </body>
+    </html>
